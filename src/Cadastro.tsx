@@ -1,60 +1,15 @@
 import { VStack, Image, Text, Box, FormControl, Input,
-  Button, Link, Center, Checkbox } from "native-base"
+  Button, Link, Center, Checkbox, ScrollView } from "native-base"
  import {TouchableOpacity} from 'react-native'
 import Logo from './assets/Logo.png'
 import { TEMAS } from "./estilos/temas";
 import { Titulo } from "./components/Titulo";
 import { EntradaTexto } from "./components/EntradaTexto";
 import { useState } from "react";
-
-
-export default function Login() {
+import { secoes } from "../uteis/CadastroEntradaTexto";
+export default function Cadastro() {
 
   const [numSecao, setNumSecao] = useState(0);
-  const secoes =[
-    {
-      id: 1, 
-      titulo: 'Insira alguns dados basicos',
-      entradaTexto: [
-        {
-          id: 1,
-          label: 'Nome',
-          placeholder: 'Digite seu nome completo'
-        },
-        {
-          id: 2,
-          label: 'Email',
-          placeholder: 'Digite seu Email'
-        }
-      ]
-    },
-    {
-      id: 2,
-      titulo: 'Agora, mais alguns dados sobre você:',
-      entradaTexto: [
-        {
-          id: 1,
-           label: 'CEP',
-          placeholder: 'Digite o seu CEP'
-        }
-      ]
-    },
-    {
-      id: 3,
-      titulo: 'Para finalizar, quais são os seus planos de saúde?',
-      entradaTexto:[],
-      checkbox:[
-        {
-          id: 1,
-          value: 'Sulamerica'
-        },
-        {
-          id: 2,
-          value: 'Unimed'
-        }
-      ]
-    }
-  ]
   
   function avancarSecao(){
     if(numSecao < secoes.length - 1){
@@ -69,8 +24,8 @@ export default function Login() {
   }
 
   return (
-    <VStack flex={1} alignItems="center" padding={5} justifyContent={"center"}>
-      <Image source={Logo} alt="Logo Voll" />
+    <ScrollView flex={1} padding={5}>
+      <Image source={Logo} alt="Logo Voll" alignSelf={'center'}/>
       
       <Titulo>
         {secoes[numSecao].titulo}
@@ -88,6 +43,8 @@ export default function Login() {
       </Box>
 
       <Box>
+        <Text color={'blue.800'} fontWeight={'bold'} fontSize={'md'}
+        marginTop={2} marginBottom={2}>Selecione o plano:</Text>
         {secoes[numSecao].checkbox?.map(checkbox => (
           <Checkbox key={checkbox.id} value={checkbox.value}>
             {checkbox.value}
@@ -109,10 +66,11 @@ export default function Login() {
       backgroundColor={'blue.800'}
       marginTop={4}
       borderRadius={'lg'}
-      onPress={() => avancarSecao()}>
+      onPress={() => avancarSecao()}
+      marginBottom={20}>
         Avançar
       </Button>
 
-    </VStack>
+    </ScrollView>
   );
 }

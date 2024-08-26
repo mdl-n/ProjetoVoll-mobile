@@ -6,10 +6,10 @@ import { VStack, Image, Text, Box, FormControl, Input,
 import Logo from './assets/Logo.png'
 import { TEMAS } from "./estilos/temas";
 import { Titulo } from "./components/Titulo";
+import Rotas from "./Rotas";
+import Cadastro from "./Cadastro";
 
-
-
-export default function Login() {
+export default function Login({navigation}) {
   return (
     <VStack flex={1} alignItems="center" padding={5} justifyContent={"center"}>
       <Image source={Logo} alt="Logo Voll" />
@@ -48,14 +48,17 @@ export default function Login() {
       backgroundColor={'blue.800'}
       marginTop={10}
       borderRadius={'lg'}
+      onPress={() => navigation.navigate('Tabs')}
       >
         Entrar
       </Button>
+
       <Link marginTop={2}>Esqueceu a senha?</Link>
 
       <Box width={'100%'} flexDirection={'row'} justifyContent={'center'} marginTop={8}>
         <Text fontSize={'md'}>Ainda não tem cadastro?</Text>
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => navigation.navigate('Cadastro')}>
           <Text color={'blue.500'} fontSize={'md'} fontWeight={"bold"}> Crie uma conta</Text>
           </TouchableOpacity>
       </Box>
